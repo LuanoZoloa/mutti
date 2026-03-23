@@ -1,0 +1,657 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>MUTTI — Preparación física, Necochea</title>
+<meta name="description" content="Preparación física personalizada con acompañamiento real. Cupos limitados. Necochea, Buenos Aires.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@400;700;800&family=DM+Sans:ital,opsz,wght@0,9..40,300;0,9..40,400;0,9..40,500;1,9..40,300&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg:#0B0D10;--bg-card:#111418;--bg-card-alt:#13181E;
+  --border:#1E232B;--border-hover:rgba(200,151,58,.3);
+  --text:#F5F7FA;--text-2:#A8B0BC;--text-3:#4E5562;
+  --accent:#C8973A;--accent-alpha:rgba(200,151,58,.12);
+  --r-btn:999px;--r-card:10px;--ease:cubic-bezier(.4,0,.2,1);
+  --font-d:'Syne',sans-serif;--font-b:'DM Sans',sans-serif
+}
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+html{scroll-behavior:smooth;-webkit-font-smoothing:antialiased}
+body{background:var(--bg);color:var(--text);font-family:var(--font-b);font-size:16px;line-height:1.6;overflow-x:hidden}
+a{color:inherit;text-decoration:none}
+button{font-family:var(--font-b);cursor:pointer}
+
+body::after{
+  content:'';position:fixed;inset:0;pointer-events:none;z-index:9999;
+  background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.028'/%3E%3C/svg%3E");
+  opacity:.5;mix-blend-mode:overlay
+}
+
+.container{max-width:1120px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
+section{padding:clamp(72px,9vw,116px) 0}
+
+/* ── INFO BAR (3 datos clave) ── */
+.info-bar{
+  position:fixed;top:0;left:0;right:0;z-index:101;
+  height:32px;display:flex;align-items:center;justify-content:center;
+  background:rgba(14,17,22,.95);border-bottom:1px solid var(--border);
+  font-size:11px;letter-spacing:.05em;color:var(--text-3);gap:0;
+  backdrop-filter:blur(12px)
+}
+.info-bar-inner{display:flex;align-items:center;gap:20px;flex-wrap:nowrap}
+.info-item{display:flex;align-items:center;gap:6px;white-space:nowrap}
+.info-item svg{flex-shrink:0;opacity:.5}
+.info-sep{color:var(--border);font-size:14px}
+.info-cupos{
+  color:var(--accent);font-weight:500;letter-spacing:.08em;
+  padding:2px 9px;border:1px solid rgba(200,151,58,.25);border-radius:var(--r-btn);
+  font-size:10px;text-transform:uppercase
+}
+
+/* ── NAV ── */
+.nav{
+  position:fixed;top:32px;left:0;right:0;z-index:100;
+  height:52px;display:flex;align-items:center;justify-content:space-between;
+  padding:0 clamp(20px,5vw,64px);
+  background:rgba(11,13,16,.82);backdrop-filter:blur(24px);-webkit-backdrop-filter:blur(24px);
+  border-bottom:1px solid var(--border)
+}
+.nav-logo{font-family:var(--font-d);font-weight:800;font-size:17px;letter-spacing:.09em;display:flex;align-items:center;gap:2px}
+.nav-logo .dot{color:var(--accent)}
+.nav-links{display:flex;align-items:center;gap:28px}
+.nav-links a{font-size:12px;font-weight:500;letter-spacing:.07em;color:var(--text-2);transition:color .2s}
+.nav-links a:hover{color:var(--text)}
+.nav-cta{
+  padding:7px 18px;border-radius:var(--r-btn);background:var(--accent);color:#000;
+  font-size:12px;font-weight:500;letter-spacing:.04em;transition:opacity .2s;border:none
+}
+.nav-cta:hover{opacity:.82}
+
+/* ── BUTTONS ── */
+.btn{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:13px 26px;border-radius:var(--r-btn);
+  font-family:var(--font-b);font-size:14px;font-weight:500;letter-spacing:.03em;
+  cursor:pointer;border:none;transition:transform .2s var(--ease),opacity .2s
+}
+.btn:hover{transform:translateY(-2px)}
+.btn-p{background:var(--accent);color:#000}
+.btn-p:hover{opacity:.86}
+.btn-o{background:transparent;color:var(--text);border:1px solid var(--border)}
+.btn-o:hover{border-color:rgba(245,247,250,.25)}
+.btn-lg{font-size:15px;padding:15px 32px}
+
+/* ── GESTO SLASH ── */
+.slash-intro{display:flex;align-items:center;gap:10px;margin-bottom:44px}
+.slash-intro::before{
+  content:'';display:block;width:2px;height:22px;
+  background:var(--accent);transform:skewX(-14deg);flex-shrink:0
+}
+.slash-intro span{font-size:10px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+
+/* ── HERO ── */
+#hero{
+  position:relative;min-height:100svh;display:flex;align-items:center;
+  padding-top:calc(52px + 32px);overflow:hidden
+}
+.hero-ambient{
+  position:absolute;inset:0;pointer-events:none;
+  background:
+    radial-gradient(ellipse 55% 50% at 75% 55%,rgba(200,151,58,.07) 0%,transparent 65%),
+    radial-gradient(ellipse 35% 45% at 15% 75%,rgba(200,151,58,.04) 0%,transparent 60%)
+}
+.hero-inner{position:relative;z-index:1;width:100%;padding:40px 0}
+.hero-eyebrow{display:flex;align-items:center;gap:10px;margin-bottom:32px;opacity:0;animation:fadeUp .7s .1s forwards}
+.hero-eyebrow-line{width:28px;height:1px;background:var(--accent)}
+.hero-eyebrow p{font-size:11px;font-weight:500;letter-spacing:.2em;text-transform:uppercase;color:var(--accent)}
+.hero-h1{
+  font-family:var(--font-d);font-weight:800;
+  font-size:clamp(80px,16vw,168px);line-height:.88;letter-spacing:-.015em;
+  opacity:0;animation:fadeUp .85s .2s forwards
+}
+.hero-h1 .acento{color:var(--accent)}
+.hero-sub{
+  margin-top:36px;
+  font-family:var(--font-d);font-size:clamp(17px,2.4vw,26px);font-weight:700;
+  color:var(--text);max-width:500px;line-height:1.15;
+  opacity:0;animation:fadeUp .8s .35s forwards
+}
+.hero-micro{margin-top:10px;font-size:14px;color:var(--text-2);opacity:0;animation:fadeUp .8s .44s forwards}
+.hero-ctas{margin-top:48px;display:flex;gap:10px;flex-wrap:wrap;opacity:0;animation:fadeUp .8s .54s forwards}
+
+.hero-slashes{
+  position:absolute;right:clamp(24px,7vw,100px);top:50%;transform:translateY(-50%);
+  display:flex;flex-direction:column;gap:8px;align-items:flex-start;
+  opacity:0;animation:fadeIn 1.3s .9s forwards;pointer-events:none
+}
+.hs{width:2px;background:linear-gradient(to bottom,transparent,var(--accent),transparent);transform:skewX(-13deg)}
+.hs:nth-child(1){height:88px;opacity:.65}
+.hs:nth-child(2){height:48px;opacity:.38;margin-left:9px}
+.hs:nth-child(3){height:24px;opacity:.18;margin-left:18px}
+
+/* ── EXPERIENCIA ── */
+#experiencia{border-top:1px solid var(--border)}
+.exp-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);border:1px solid var(--border);
+  border-radius:var(--r-card);overflow:hidden
+}
+.exp-item{background:var(--bg-card);padding:clamp(28px,3.5vw,44px);transition:background .25s}
+.exp-item:hover{background:var(--bg-card-alt)}
+.exp-n{
+  font-family:var(--font-d);font-size:10px;font-weight:700;letter-spacing:.15em;
+  color:var(--accent);margin-bottom:22px;display:flex;align-items:center;gap:8px
+}
+.exp-n::after{content:'';flex:1;height:1px;background:var(--border)}
+.exp-title{font-family:var(--font-d);font-size:clamp(18px,2vw,22px);font-weight:700;margin-bottom:10px;line-height:1.1}
+.exp-body{font-size:13.5px;color:var(--text-2);line-height:1.65}
+
+/* ── ACTIVIDADES ── */
+.acts-h2{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.5vw,50px);line-height:1;margin-bottom:16px}
+.acts-sub{font-size:15px;color:var(--text-2);margin-bottom:32px}
+
+/* CHIPS */
+.chips-bar{margin-bottom:36px}
+.chips-label{font-size:10.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--text-3);margin-bottom:6px}
+.chips-hint{font-size:12px;color:var(--text-3);margin-bottom:12px;font-style:italic}
+.chips-row{display:flex;gap:7px;flex-wrap:wrap}
+.chip{
+  padding:7px 15px;border-radius:var(--r-btn);
+  border:1px solid var(--border);background:transparent;
+  color:var(--text-2);font-size:13px;font-weight:500;
+  transition:border-color .2s,color .2s,background .2s
+}
+.chip:hover{border-color:rgba(200,151,58,.4);color:var(--text)}
+.chip.active{background:var(--accent-alpha);border-color:var(--accent);color:var(--accent)}
+
+/* Botón WA dinámico */
+.wa-objetivo-wrap{margin-top:20px;margin-bottom:40px}
+.wa-objetivo{
+  display:inline-flex;align-items:center;gap:8px;
+  padding:12px 24px;border-radius:var(--r-btn);
+  background:var(--accent);color:#000;
+  font-family:var(--font-b);font-size:14px;font-weight:500;
+  border:none;cursor:pointer;transition:opacity .2s,transform .2s
+}
+.wa-objetivo:hover{opacity:.86;transform:translateY(-2px)}
+.wa-objetivo-label{font-size:11px;color:var(--text-3);margin-top:7px;display:block}
+
+/* Act grid */
+.act-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:11px}
+.act-card{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-card);
+  padding:26px;cursor:pointer;position:relative;overflow:hidden;
+  transition:border-color .25s,transform .25s,background .25s;display:flex;flex-direction:column
+}
+.act-card::after{
+  content:'';position:absolute;bottom:0;left:0;right:0;height:2px;
+  background:var(--accent);transform:scaleX(0);transform-origin:left;transition:transform .3s var(--ease)
+}
+.act-card:hover{border-color:var(--border-hover);transform:translateY(-3px);background:var(--bg-card-alt)}
+.act-card:hover::after{transform:scaleX(1)}
+.act-name{font-family:var(--font-d);font-size:17px;font-weight:700;margin-bottom:7px}
+.act-for{font-size:13px;color:var(--text-2);margin-bottom:20px;line-height:1.55;flex:1}
+.act-cta{
+  font-size:11.5px;font-weight:500;color:var(--accent);letter-spacing:.03em;
+  display:flex;align-items:center;gap:5px;transition:gap .2s;margin-top:auto
+}
+.act-card:hover .act-cta{gap:9px}
+.act-cta::after{content:'→'}
+
+/* Línea "cómo elijo" */
+.act-guide{
+  margin-top:18px;font-size:13.5px;color:var(--text-3);
+  display:flex;align-items:center;gap:8px
+}
+.act-guide::before{content:'';display:block;width:16px;height:1px;background:var(--border);flex-shrink:0}
+
+/* ── HORARIOS ── */
+#horarios{border-top:1px solid var(--border)}
+.hor-h2{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.5vw,50px);line-height:1;margin-bottom:40px}
+.hor-wrap{
+  background:var(--bg-card);border:1px solid var(--border);border-radius:var(--r-card);
+  padding:clamp(24px,3.5vw,44px);max-width:520px;margin-bottom:28px
+}
+.hor-table{width:100%;border-collapse:collapse}
+.hor-table tr{border-bottom:1px solid var(--border)}
+.hor-table tr:last-child{border-bottom:none}
+.hor-table td{padding:16px 0;font-size:15px}
+.hor-table td:first-child{color:var(--text-2);width:55%}
+.hor-table td:last-child{font-family:var(--font-d);font-weight:700;font-size:16px}
+.hor-closed{color:var(--text-3)!important;font-weight:400!important;font-family:var(--font-b)!important;font-size:14px!important}
+
+/* ── CRECE ── */
+#crece{border-top:1px solid var(--border);padding:clamp(52px,7vw,80px) 0}
+.crece-inner{display:flex;align-items:center;justify-content:space-between;gap:40px;flex-wrap:wrap}
+.crece-h{font-family:var(--font-d);font-weight:800;font-size:clamp(26px,4vw,44px);line-height:1;margin-bottom:8px}
+.crece-sub{font-size:14.5px;color:var(--text-2)}
+
+/* ── UBICACION ── */
+#ubicacion{border-top:1px solid var(--border)}
+.ubi-grid{display:grid;grid-template-columns:1fr 1fr;gap:44px;align-items:start}
+.mapa{border-radius:var(--r-card);overflow:hidden;border:1px solid var(--border);aspect-ratio:4/3;background:var(--bg-card)}
+.mapa iframe{width:100%;height:100%;display:block;filter:grayscale(1) brightness(.65) contrast(1.1)}
+.ubi-h{font-family:var(--font-d);font-weight:800;font-size:clamp(22px,3vw,32px);line-height:1.15;margin-bottom:8px}
+.ubi-micro{font-size:14px;color:var(--text-2);margin-bottom:32px}
+
+/* ── EMPEZAR ── */
+#empezar{border-top:1px solid var(--border)}
+.emp-h2{font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.5vw,50px);line-height:1;margin-bottom:40px}
+.steps-grid{
+  display:grid;grid-template-columns:repeat(3,1fr);
+  gap:1px;background:var(--border);border:1px solid var(--border);
+  border-radius:var(--r-card);overflow:hidden;margin-bottom:28px
+}
+.step{background:var(--bg-card);padding:clamp(26px,3.5vw,40px)}
+.step-n{
+  font-family:var(--font-d);font-size:42px;font-weight:800;line-height:1;
+  margin-bottom:18px;-webkit-text-stroke:1px rgba(200,151,58,.35);color:transparent
+}
+.step-title{font-family:var(--font-d);font-size:16px;font-weight:700;margin-bottom:7px}
+.step-body{font-size:13px;color:var(--text-2);line-height:1.65}
+.steps-micro{font-size:13.5px;color:var(--text-3);text-align:center;font-style:italic}
+
+/* ── CONTACTO ── */
+#contacto{border-top:1px solid var(--border);text-align:center}
+.con-label{font-size:10px;letter-spacing:.22em;text-transform:uppercase;color:var(--accent);margin-bottom:18px}
+.con-h2{font-family:var(--font-d);font-weight:800;font-size:clamp(40px,8vw,82px);line-height:.92;margin-bottom:10px}
+.con-sub{font-size:15px;color:var(--text-2);margin-bottom:44px}
+.con-links{display:flex;align-items:center;justify-content:center;gap:20px;margin-top:28px;flex-wrap:wrap}
+.con-tel{font-size:14px;color:var(--text-2)}
+.con-sep{color:var(--border)}
+.con-ig{font-size:14px;color:var(--text-2);border-bottom:1px solid var(--border);padding-bottom:1px;transition:color .2s,border-color .2s}
+.con-ig:hover{color:var(--accent);border-color:var(--accent)}
+
+/* ── FOOTER ── */
+footer{border-top:1px solid var(--border);padding:26px 0}
+.foot{display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:14px}
+.foot-logo{font-family:var(--font-d);font-weight:800;font-size:14px;letter-spacing:.1em;color:var(--text-3)}
+.foot-meta{font-size:11.5px;color:var(--text-3)}
+
+/* ── STICKY MOBILE ── */
+.sticky-cta{display:none;position:fixed;bottom:14px;left:50%;transform:translateX(-50%);z-index:200;white-space:nowrap}
+.sticky-cta a{box-shadow:0 8px 36px rgba(0,0,0,.65)}
+
+/* ── REVEAL ── */
+.r{opacity:0;transform:translateY(9px);transition:opacity .55s var(--ease),transform .55s var(--ease)}
+.r.v{opacity:1;transform:translateY(0)}
+
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+@keyframes fadeIn{from{opacity:0}to{opacity:1}}
+
+@media(max-width:900px){
+  .exp-grid,.steps-grid{grid-template-columns:1fr}
+  .act-grid{grid-template-columns:1fr 1fr}
+  .ubi-grid{grid-template-columns:1fr}
+  .hero-slashes,.nav-links{display:none}
+  .info-bar-inner{gap:12px}
+}
+@media(max-width:600px){
+  .act-grid{grid-template-columns:1fr}
+  .sticky-cta{display:block}
+  .nav-cta{display:none}
+  .crece-inner{flex-direction:column;gap:20px}
+  .info-bar{display:none}
+  .nav{top:0}
+  #hero{padding-top:52px}
+}
+</style>
+</head>
+<body>
+
+<!-- ━━━ INFO BAR: 3 datos clave ━━━ -->
+<div class="info-bar" role="banner">
+  <div class="info-bar-inner">
+    <span class="info-item">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+      Av. 2 N° 3940, Necochea
+    </span>
+    <span class="info-sep">·</span>
+    <span class="info-item">
+      <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      Lun–Vie 07–22 &nbsp;·&nbsp; Sáb 09–12 y 18–20
+    </span>
+    <span class="info-sep">·</span>
+    <span class="info-cupos">Cupos limitados</span>
+  </div>
+</div>
+
+<!-- ━━━ NAV ━━━ -->
+<nav class="nav">
+  <a href="#hero" class="nav-logo">MUTTI<span class="dot">.</span></a>
+  <div class="nav-links">
+    <a href="#horarios">Horarios</a>
+    <a href="#actividades">Actividades</a>
+    <a href="#ubicacion">Ubicación</a>
+  </div>
+  <button class="nav-cta" id="nav-wa-btn" onclick="openWA('nav')">WhatsApp</button>
+</nav>
+
+<!-- ━━━ HERO ━━━ -->
+<section id="hero">
+  <div class="hero-ambient" aria-hidden="true"></div>
+  <div class="container hero-inner">
+    <div class="hero-eyebrow">
+      <div class="hero-eyebrow-line"></div>
+      <p>Preparación física · Necochea</p>
+    </div>
+    <h1 class="hero-h1">MUTTI<span class="acento">.</span></h1>
+    <p class="hero-sub">Acá no venís a cumplir.<br>Venís a mejorar.</p>
+    <p class="hero-micro">Acompañamiento real desde el día uno. Pocos cupos. Mucho método.</p>
+    <div class="hero-ctas">
+      <button id="hero-wa-btn" class="btn btn-p" onclick="openWA('hero')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span id="hero-wa-label">Consultar por WhatsApp</span>
+      </button>
+      <a href="#horarios" class="btn btn-o">Ver horarios</a>
+    </div>
+  </div>
+  <div class="hero-slashes" aria-hidden="true">
+    <div class="hs"></div>
+    <div class="hs"></div>
+    <div class="hs"></div>
+  </div>
+</section>
+
+<!-- ━━━ EXPERIENCIA ━━━ -->
+<section id="experiencia">
+  <div class="container">
+    <div class="slash-intro r"><span>La experiencia</span></div>
+    <h2 class="r" style="font-family:var(--font-d);font-weight:800;font-size:clamp(30px,4.5vw,50px);line-height:1;margin-bottom:48px">Así es MUTTI.</h2>
+    <div class="exp-grid r">
+      <div class="exp-item">
+        <div class="exp-n">01</div>
+        <div class="exp-title">Plan a tu medida</div>
+        <p class="exp-body">Cada persona tiene un objetivo distinto. La preparación también. Nada se improvisa, nada se copia.</p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-n">02</div>
+        <div class="exp-title">Entrenamiento mental</div>
+        <p class="exp-body">Tan importante como el físico. Usamos herramientas de coaching mental para que el hábito se instale y se sostenga.</p>
+      </div>
+      <div class="exp-item">
+        <div class="exp-n">03</div>
+        <div class="exp-title">Constancia real</div>
+        <p class="exp-body">Resultados que se sostienen porque vienen de un método, no de la motivación del momento.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━ ACTIVIDADES ━━━ -->
+<section id="actividades">
+  <div class="container">
+    <div class="slash-intro r"><span>Actividades</span></div>
+    <h2 class="acts-h2 r">¿Qué hacés en MUTTI?</h2>
+
+    <!-- CHIPS + WA DINÁMICO -->
+    <div class="chips-bar r">
+      <p class="chips-label">Tu objetivo</p>
+      <p class="chips-hint">Elegí tu objetivo y te respondemos con un plan recomendado.</p>
+      <div class="chips-row">
+        <button class="chip active" data-objetivo="bajar">Bajar de peso</button>
+        <button class="chip" data-objetivo="fuerza">Ganar fuerza</button>
+        <button class="chip" data-objetivo="habito">Volver al hábito</button>
+        <button class="chip" data-objetivo="salud">Mejorar salud</button>
+      </div>
+    </div>
+    <div class="wa-objetivo-wrap r">
+      <button class="wa-objetivo" id="obj-wa-btn" onclick="openWA('objetivo')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        <span id="obj-wa-label">Consultar plan para bajar de peso</span>
+      </button>
+      <span class="wa-objetivo-label">El mensaje se carga automáticamente con tu objetivo.</span>
+    </div>
+
+    <div class="act-grid">
+      <div class="act-card r" data-act="Musculación" data-msg="Hola! Me interesa Musculación en MUTTI. ¿Qué días/horarios hay y cómo me anoto?">
+        <div class="act-name">Musculación</div>
+        <p class="act-for">Para quien quiere ganar fuerza, volumen o definición con método y seguimiento.</p>
+        <span class="act-cta">Consultar Musculación</span>
+      </div>
+      <div class="act-card r" data-act="Funcional" data-msg="Hola! Me interesa Entrenamiento Funcional en MUTTI. ¿Cómo funciona y cuándo puedo empezar?">
+        <div class="act-name">Funcional</div>
+        <p class="act-for">Para quien busca rendimiento, agilidad y trabajo grupal con intensidad progresiva.</p>
+        <span class="act-cta">Consultar Funcional</span>
+      </div>
+      <div class="act-card r" data-act="Cardio" data-msg="Hola! Me interesa la parte de Cardio en MUTTI. ¿Qué opciones hay y cómo arranco?">
+        <div class="act-name">Cardio</div>
+        <p class="act-for">Para quien quiere mejorar resistencia y composición corporal con progresión real.</p>
+        <span class="act-cta">Consultar Cardio</span>
+      </div>
+      <div class="act-card r" data-act="Entrenamiento Personal" data-msg="Hola! Me interesa el Entrenamiento Personal en MUTTI. ¿Cómo funciona y cuál es el costo?">
+        <div class="act-name">Personal</div>
+        <p class="act-for">Para quien quiere atención uno a uno y resultados específicos en el menor tiempo.</p>
+        <span class="act-cta">Consultar Personal</span>
+      </div>
+      <div class="act-card r" data-act="Movilidad y Stretching" data-msg="Hola! Me interesa Movilidad/Stretching en MUTTI. ¿Qué días hay y para quién es?">
+        <div class="act-name">Movilidad</div>
+        <p class="act-for">Para quien necesita recuperar, soltar tensiones o complementar su entrenamiento.</p>
+        <span class="act-cta">Consultar Movilidad</span>
+      </div>
+      <div class="act-card r" data-act="Entrenamiento Mental" data-msg="Hola! Me interesa el Entrenamiento Mental en MUTTI. ¿Me contás en qué consiste?">
+        <div class="act-name">Entrenamiento mental</div>
+        <p class="act-for">Para quien quiere trabajar el costado mental del proceso: hábito, motivación y mentalidad.</p>
+        <span class="act-cta">Consultar Entrenamiento Mental</span>
+      </div>
+    </div>
+
+    <p class="act-guide r">¿No sabés por dónde empezar? Te orientamos sin compromiso.</p>
+  </div>
+</section>
+
+<!-- ━━━ HORARIOS ━━━ -->
+<section id="horarios">
+  <div class="container">
+    <div class="slash-intro r"><span>Horarios</span></div>
+    <h2 class="hor-h2 r">Abierto cuando lo necesitás.</h2>
+    <div class="hor-wrap r">
+      <table class="hor-table" aria-label="Horarios MUTTI">
+        <tbody>
+          <tr><td>Lunes a viernes</td><td>07:00 — 22:00 hs</td></tr>
+          <tr><td>Sábados mañana</td><td>09:00 — 12:00 hs</td></tr>
+          <tr><td>Sábados tarde</td><td>18:00 — 20:00 hs</td></tr>
+          <tr><td>Domingos</td><td class="hor-closed">Cerrado</td></tr>
+        </tbody>
+      </table>
+    </div>
+    <div class="r">
+      <button class="btn btn-o" onclick="openWA('horarios')">Consultar por WhatsApp</button>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━ CRECE ━━━ -->
+<section id="crece">
+  <div class="container">
+    <div class="crece-inner r">
+      <div>
+        <div class="slash-intro" style="margin-bottom:16px"><span>En movimiento</span></div>
+        <h2 class="crece-h">Mutti crece.</h2>
+        <p class="crece-sub">Más espacio. Mismo método. Misma esencia.</p>
+      </div>
+      <a href="https://instagram.com/mutti.gimnasio" target="_blank" rel="noopener" class="btn btn-o">Ver novedades en IG →</a>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━ UBICACION ━━━ -->
+<section id="ubicacion">
+  <div class="container">
+    <div class="slash-intro r"><span>Ubicación</span></div>
+    <div class="ubi-grid">
+      <div class="r">
+        <h2 class="ubi-h">Av. 2 N° 3940<br>Necochea.</h2>
+        <p class="ubi-micro">Te queda a un toque.</p>
+        <a href="https://www.google.com/maps/dir/?api=1&destination=Avenida+2+3940+Necochea+Buenos+Aires+Argentina" target="_blank" rel="noopener" class="btn btn-p" onclick="track('click_maps')">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          Cómo llegar
+        </a>
+      </div>
+      <div class="mapa r">
+        <iframe
+          title="Ubicación MUTTI Gimnasio"
+          src="https://maps.google.com/maps?q=Avenida+2+3940,+Necochea,+Buenos+Aires,+Argentina&output=embed&z=16"
+          loading="lazy" allowfullscreen referrerpolicy="no-referrer-when-downgrade">
+        </iframe>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━ EMPEZAR ━━━ -->
+<section id="empezar">
+  <div class="container">
+    <div class="slash-intro r"><span>Cómo empezar</span></div>
+    <h2 class="emp-h2 r">Tres pasos. Nada más.</h2>
+    <div class="steps-grid r">
+      <div class="step">
+        <div class="step-n">01</div>
+        <div class="step-title">Escribís por WhatsApp</div>
+        <p class="step-body">Un mensaje alcanza. Te respondemos rápido y sin vueltas.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">02</div>
+        <div class="step-title">Te guiamos según tu objetivo</div>
+        <p class="step-body">Te decimos qué actividad te conviene y armamos tu plan.</p>
+      </div>
+      <div class="step">
+        <div class="step-n">03</div>
+        <div class="step-title">Venís y arrancás</div>
+        <p class="step-body">Sin trámites. Llegás, te presentás y empezás a entrenar.</p>
+      </div>
+    </div>
+    <p class="steps-micro r">No necesitás estar en forma para empezar.</p>
+  </div>
+</section>
+
+<!-- ━━━ CONTACTO ━━━ -->
+<section id="contacto">
+  <div class="container">
+    <p class="con-label r">El primer paso</p>
+    <h2 class="con-h2 r">¿Arrancamos?</h2>
+    <p class="con-sub r">Escribinos. Sin compromiso. Sin formularios.</p>
+    <div class="r">
+      <button class="btn btn-p btn-lg" onclick="openWA('contacto')">
+        <svg width="17" height="17" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+        Consultar por WhatsApp
+      </button>
+    </div>
+    <div class="con-links r">
+      <span class="con-tel">2262 31 7409</span>
+      <span class="con-sep">|</span>
+      <a href="https://instagram.com/mutti.gimnasio" target="_blank" rel="noopener" class="con-ig">@mutti.gimnasio</a>
+    </div>
+  </div>
+</section>
+
+<!-- ━━━ FOOTER ━━━ -->
+<footer>
+  <div class="container">
+    <div class="foot">
+      <span class="foot-logo">MUTTI.</span>
+      <span class="foot-meta">Av. 2 N° 3940 · Necochea, Buenos Aires</span>
+      <span class="foot-meta">Lun–Vie 07–22 · Sáb 09–12 / 18–20</span>
+    </div>
+  </div>
+</footer>
+
+<!-- STICKY MOBILE -->
+<div class="sticky-cta">
+  <button class="btn btn-p" onclick="openWA('sticky')">
+    <svg width="15" height="15" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+    <span id="sticky-wa-label">Consultar por WhatsApp</span>
+  </button>
+</div>
+
+<script>
+(function(){
+  const WA_BASE = 'https://wa.me/5492262317409?text=';
+  const WA_DEFAULT = 'Hola! Quiero empezar en MUTTI. ¿Me contás planes y cómo arrancar?';
+
+  // ── MENSAJES POR OBJETIVO ──
+  const OBJETIVO_MSGS = {
+    bajar:  'Hola! Mi objetivo es bajar de peso. ¿Qué plan me recomendás en MUTTI y cómo arranco?',
+    fuerza: 'Hola! Quiero ganar fuerza y músculo. ¿Qué plan me recomendás en MUTTI y cómo arranco?',
+    habito: 'Hola! Quiero retomar el entrenamiento. ¿Cómo me recomendás empezar en MUTTI?',
+    salud:  'Hola! Mi objetivo es mejorar mi salud general. ¿Qué plan me recomendás en MUTTI?'
+  };
+  const OBJETIVO_LABELS = {
+    bajar:  'Consultar plan para bajar de peso',
+    fuerza: 'Consultar plan para ganar fuerza',
+    habito: 'Consultar plan para volver al hábito',
+    salud:  'Consultar plan para mejorar mi salud'
+  };
+
+  let currentMsg = WA_DEFAULT;
+  let currentObjetivoKey = 'bajar';
+
+  // ── CHIPS ──
+  document.querySelectorAll('.chip').forEach(chip => {
+    chip.addEventListener('click', () => {
+      document.querySelectorAll('.chip').forEach(c => c.classList.remove('active'));
+      chip.classList.add('active');
+      currentObjetivoKey = chip.dataset.objetivo;
+      currentMsg = OBJETIVO_MSGS[currentObjetivoKey];
+      document.getElementById('obj-wa-label').textContent = OBJETIVO_LABELS[currentObjetivoKey];
+      document.getElementById('hero-wa-label').textContent = OBJETIVO_LABELS[currentObjetivoKey];
+      document.getElementById('sticky-wa-label').textContent = OBJETIVO_LABELS[currentObjetivoKey];
+      // track('chip_objetivo_' + currentObjetivoKey);
+    });
+  });
+
+  // ── ACTIVIDADES ──
+  document.querySelectorAll('.act-card').forEach(card => {
+    card.addEventListener('click', () => {
+      const msg = card.dataset.msg;
+      // track('click_whatsapp_actividad', { actividad: card.dataset.act });
+      window.open(WA_BASE + encodeURIComponent(msg), '_blank', 'noopener');
+    });
+  });
+
+  // ── FUNCIÓN CENTRAL WA ──
+  window.openWA = function(source) {
+    let msg = currentMsg;
+    if (source === 'horarios') msg = 'Hola! Quiero consultar sobre horarios y actividades en MUTTI.';
+    // track('click_whatsapp_' + source);
+    window.open(WA_BASE + encodeURIComponent(msg), '_blank', 'noopener');
+  };
+
+  // ── TRACKING ──
+  // Descomentar cuando haya Google Analytics / GTM conectado:
+  window.track = function(event, params) {
+    // gtag('event', event, params || {});
+    // console.log('[MUTTI track]', event, params);
+  };
+
+  // Scroll a horarios → track
+  const horSection = document.getElementById('horarios');
+  const horObs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){
+        // track('scroll_horarios');
+        horObs.unobserve(e.target);
+      }
+    });
+  }, { threshold: .3 });
+  if(horSection) horObs.observe(horSection);
+
+  // ── SCROLL REVEAL ──
+  const obs = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if(e.isIntersecting){ e.target.classList.add('v'); obs.unobserve(e.target); }
+    });
+  }, { threshold:.08, rootMargin:'0px 0px -32px 0px' });
+
+  document.querySelectorAll('.r').forEach(el => obs.observe(el));
+
+  // Stagger
+  document.querySelectorAll('.exp-item, .act-card, .step').forEach((el, i) => {
+    el.style.transitionDelay = (i % 6 * .07) + 's';
+  });
+})();
+</script>
+</body>
+</html>
